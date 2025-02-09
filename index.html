@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منصة الفيء الرقمية</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(to right, #4A90E2, #50A5E2);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white rounded-lg shadow-2xl p-6 max-w-md w-full text-center">
+    <!-- شعار المدرسة -->
+    <img src="https://j.top4top.io/p_3327lje811.jpg" alt="شعار المدرسة" class="mx-auto w-24 h-24 rounded-full shadow-md mb-4">
+    
+    <h1 class="text-2xl font-bold text-gray-700">منصة الفيء الرقمية</h1>
+    <p class="text-gray-500 text-sm mb-4">مدرسة محمد بن سليمان الغافري</p>
+
+    <!-- إدخال رقم الطالب -->
+    <label for="studentId" class="block text-lg font-medium text-gray-700">أدخل رقم الطالب:</label>
+    <input type="text" id="studentId" class="mt-1 mb-4 w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-center">
+
+    <!-- اختيار المادة -->
+    <label for="subjectSelect" class="block text-lg font-medium text-gray-700">اختر المادة:</label>
+    <select id="subjectSelect" class="mt-1 mb-4 w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+      <option value="">-- اختر المادة --</option>
+      <option value="social">📚 الدراسات الاجتماعية</option>
+      <option value="islamic">🕌 التربية الإسلامية</option>
+      <option value="arabic5_9">📖 اللغة العربية (الصفوف 5-9)</option>
+      <option value="arabic10">📖 اللغة العربية (الصف العاشر)</option>
+    </select>
+
+    <!-- زر البحث -->
+    <button id="fetchDataButton" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 shadow-md transition duration-300">
+      عرض البيانات
+    </button>
+
+    <!-- عرض النتائج -->
+    <div id="result" class="mt-6 text-right text-gray-800"></div>
+  </div>
+
+  <script>
+    document.getElementById('fetchDataButton').addEventListener('click', async () => {
+      const studentId = document.getElementById('studentId').value.trim();
+      const subject = document.getElementById('subjectSelect').value;
+      const resultDiv = document.getElementById('result');
+
+      if (!studentId || !subject) {
+        alert('يرجى إدخال رقم الطالب واختيار المادة.');
+        return;
+      }
+
+      const subjectLinks = {
+        social: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSFIgBQBnhabaxHKHqfKQCXqo1CINVKlZt10oI4nH5enwnXTeuMAOYxIdCbZPmdr2DlNBXjpolxCqFU/pub?gid=0&single=true&output=csv",
+        islamic: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTziRUgn9KjIrOgSxrUuMNHMd1QUkVmaQKC7iBBaX4h355nCOW92woD3mIkfMHhgJ2JACjIEnDRgSYJ/pubhtml?gid=0&single=true",
+        arabic5_9: "https://docs.google.com/spreadsheets/d/e/2PACX-1vThjpWAjLmwDFHb3Ub_gBZdd5HnUlq7DgTR2RQR9ontGqrylOHHq7lSCEaka8fu50VkH5OHk6hvX9A1/pub?gid=0&single=true&output=csv",
+        arabic10: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTM6iQR-4fnD9KYBOpbcOfvXO7-a88-K6q92ZFB3qdGq583nFjMoMegW8MULOoybDsSIr1mNU6RvsuN/pub?gid=0&single=true&output=csv"
+      };
+
+      resultDiv.innerHTML = '<p class="text-blue-600 font-semibold">🔄 جاري تحميل البيانات...</p>';
+
+      try {
+        const response = await fetch(subjectLinks[subject]);
+        const csvData = await response.text();
+        const rows = csvData.split('\n').map(row => row.split(','));
+
+        const headers = rows[0];
+        const studentRow = rows.find(row => row[1].trim() === studentId);
+
+        if (!studentRow) {
+          resultDiv.innerHTML = '<p class="text-red-500 font-semibold">❌ لم يتم العثور على بيانات لهذا الطالب.</p>';
+          return;
+        }
+
+        resultDiv.innerHTML = `<h2 class="text-lg font-bold text-gray-700 border-b pb-2 mb-4">📌 بيانات الطالب:</h2>`;
+        studentRow.forEach((data, index) => {
+          if (data && headers[index]) {
+            resultDiv.innerHTML += `<p class="mt-2 p-2 bg-gray-100 rounded-lg shadow-sm"><strong>${headers[index]}:</strong> ${data}</p>`;
+          }
+        });
+
+      } catch (error) {
+        resultDiv.innerHTML = '<p class="text-red-500 font-semibold">⚠️ حدث خطأ أثناء تحميل البيانات.</p>';
+        console.error('Error fetching data:', error);
+      }
+    });
+  </script>
+</body>
+</html>

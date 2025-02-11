@@ -21,17 +21,20 @@
 
     <!-- إدخال رقم الطالب -->
     <label for="studentId" class="block text-lg font-medium text-gray-700">أدخل رقم الطالب:</label>
-    <input type="text" id="studentId" class="mt-1 mb-4 w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-center">
+    <input type="text" id="studentId" class="mt-1 mb-4 w-full p-2 border border-gray-300 rounded-lg text-center">
 
     <!-- اختيار المادة -->
     <label for="subjectSelect" class="block text-lg font-medium text-gray-700">اختر المادة:</label>
-    <select id="subjectSelect" class="mt-1 mb-4 w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+    <select id="subjectSelect" class="mt-1 mb-4 w-full p-2 border border-gray-300 rounded-lg">
       <option value="">-- اختر المادة --</option>
       <option value="social">📚 الدراسات الاجتماعية</option>
       <option value="islamic">🕌 التربية الإسلامية</option>
       <option value="arabic5_9">📖 اللغة العربية (الصفوف 5-9)</option>
       <option value="arabic10">📖 اللغة العربية (الصف العاشر)</option>
       <option value="math5_9">➗ الرياضيات (الصفوف 5-9)</option>
+      <option value="math10">📊 الرياضيات (الصف العاشر)</option>
+      <option value="english5_9">📝 اللغة الإنجليزية (الصفوف 5-9)</option>
+      <option value="english10">📝 اللغة الإنجليزية (الصف العاشر)</option>
       <option value="physics">🔬 الفيزياء</option>
       <option value="science">🧪 العلوم</option>
       <option value="chemistry">🧫 الكيمياء</option>
@@ -39,7 +42,7 @@
     </select>
 
     <!-- زر البحث -->
-    <button id="fetchDataButton" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 shadow-md transition duration-300">
+    <button id="fetchDataButton" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
       عرض البيانات
     </button>
 
@@ -64,10 +67,9 @@
         arabic5_9: "https://docs.google.com/spreadsheets/d/e/2PACX-1vThjpWAjLmwDFHb3Ub_gBZdd5HnUlq7DgTR2RQR9ontGqrylOHHq7lSCEaka8fu50VkH5OHk6hvX9A1/pub?gid=0&single=true&output=csv",
         arabic10: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTM6iQR-4fnD9KYBOpbcOfvXO7-a88-K6q92ZFB3qdGq583nFjMoMegW8MULOoybDsSIr1mNU6RvsuN/pub?gid=0&single=true&output=csv",
         math5_9: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTDtoNYA9iUQr0Pjk0_hPIFYUFsDricAMFeeHnQ7ozlE3Mun2w2r7ezXT1MmH9-r-vCKSES_5kihPTr/pub?gid=0&single=true&output=csv",
-        physics: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfKq9UFhhb8P7cTX4mtlRwzku1F5xZuVMxq_Qmfn3j0yCefJwzjOIEj0CrYG9Je9ubAdRwXZusMuYr/pub?gid=0&single=true&output=csv",
-        science: "https://docs.google.com/spreadsheets/d/e/2PACX-1vShML8jSszGxHx6ESzcgf1DTYyPAvpeiYfhEt_6lxQ6xRBAeqbMa2blTI9lZVRXX-M5FNjAF4oRmLeY/pub?gid=0&single=true&output=csv",
-        chemistry: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRbz8zyGR6OwEPE8bZt6M22YtkiVdnhx2uuyBfUbMH6BW7725Tn5oHGlOcuGdxPPjw4dO-AJkaGW7ju/pub?gid=0&single=true&output=csv",
-        biology: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSk_TuS5L3YexPjYyLlIL6nHFAvkafQKGCYwwKw57vBo1FWF97RM5oSQPCVKZuWsD9egF5r9gErhzMn/pub?gid=0&single=true&output=csv"
+        math10: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtOrt04XkbLCsuQTQhSpuxaxKQmJ_NF_ThauuSYBlNoQEWkEPs8xWUcDYDUQcctAXelNeFZxR4-uqZ/pub?gid=0&single=true&output=csv",
+        english5_9: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSFFnnz9YGNyyOd0Nd2c2cKCEQoElKl9u5XXIKApL-XV3qucYI-0j-S43_OsF-X8Hhtwj3NaEy7LpeL/pub?gid=0&single=true&output=csv",
+        english10: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSKhbG0SfWfab6k5v1rPy5DPa9w-6vgcrVTXm_yZr7QmfLOJi6tAOcAQVeKhztfXO9FtB5Px0e5Y6qb/pub?gid=0&single=true&output=csv"
       };
 
       resultDiv.innerHTML = '<p class="text-blue-600 font-semibold">🔄 جاري تحميل البيانات...</p>';

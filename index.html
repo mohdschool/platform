@@ -3,16 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>منصة الفيء الرقمية</title>
+  <title>منصة الدريز الرقمية</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       background: linear-gradient(to right, #4A90E2, #50A5E2);
+      font-family: 'Tajawal', sans-serif;
+    }
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    .table-header {
+      background-color: #4A90E2;
+      color: white;
+      font-weight: bold;
+    }
+    .table-row:nth-child(even) {
+      background-color: #f9fafb;
+    }
+    .table-row:hover {
+      background-color: #f0f4f8;
     }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
-  <div class="bg-white rounded-lg shadow-2xl p-6 max-w-md w-full text-center">
+  <div class="card bg-white rounded-lg shadow-2xl p-6 max-w-md w-full text-center">
     <!-- شعار المدرسة -->
     <img src="https://j.top4top.io/p_3327lje811.jpg" alt="شعار المدرسة" class="mx-auto w-24 h-24 rounded-full shadow-md mb-4">
     
@@ -21,11 +41,11 @@
 
     <!-- إدخال رقم الطالب -->
     <label for="studentId" class="block text-lg font-medium text-gray-700">أدخل رقم الطالب:</label>
-    <input type="text" id="studentId" class="mt-1 mb-4 w-full p-2 border border-gray-300 rounded-lg text-center">
+    <input type="text" id="studentId" class="mt-1 mb-4 w-full p-2 border border-gray-300 rounded-lg text-center focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
 
     <!-- اختيار المادة -->
     <label for="subjectSelect" class="block text-lg font-medium text-gray-700">اختر المادة:</label>
-    <select id="subjectSelect" class="mt-1 mb-4 w-full p-2 border border-gray-300 rounded-lg">
+    <select id="subjectSelect" class="mt-1 mb-4 w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
       <option value="">-- اختر المادة --</option>
       <option value="social">📚 الدراسات الاجتماعية</option>
       <option value="islamic">🕌 التربية الإسلامية</option>
@@ -42,7 +62,7 @@
     </select>
 
     <!-- زر البحث -->
-    <button id="fetchDataButton" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+    <button id="fetchDataButton" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
       عرض البيانات
     </button>
 
@@ -87,12 +107,25 @@
           return;
         }
 
-        resultDiv.innerHTML = `<h2 class="text-lg font-bold text-gray-700 border-b pb-2 mb-4">📌 بيانات الطالب:</h2>`;
-        studentRow.forEach((data, index) => {
-          if (data && headers[index]) {
-            resultDiv.innerHTML += `<p class="mt-2 p-2 bg-gray-100 rounded-lg shadow-sm"><strong>${headers[index]}:</strong> ${data}</p>`;
-          }
-        });
+        // إنشاء الجدول
+        let tableHTML = `
+          <div class="overflow-x-auto">
+            <table class="w-full bg-white rounded-lg shadow-md">
+              <thead>
+                <tr class="table-header">
+                  ${headers.map(header => `<th class="px-4 py-2">${header}</th>`).join('')}
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-row">
+                  ${studentRow.map(data => `<td class="px-4 py-2 border">${data}</td>`).join('')}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+
+        resultDiv.innerHTML = `<h2 class="text-lg font-bold text-gray-700 mb-4">📌 بيانات الطالب:</h2>${tableHTML}`;
 
       } catch (error) {
         resultDiv.innerHTML = '<p class="text-red-500 font-semibold">⚠️ حدث خطأ أثناء تحميل البيانات.</p>';

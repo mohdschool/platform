@@ -103,25 +103,35 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
-    .button-secondary {
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .header-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .header-buttons button {
       background: linear-gradient(135deg, #4A90E2, #50A5E2);
       color: #fff;
+      padding: 8px 16px;
+      border-radius: 8px;
       font-weight: bold;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .button-secondary:hover {
+    .header-buttons button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-    .button-tertiary {
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: #fff;
-      font-weight: bold;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .button-tertiary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     .modal {
       display: none;
@@ -161,34 +171,6 @@
       border: none;
       cursor: pointer;
     }
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    .header-buttons {
-      display: flex;
-      gap: 10px;
-    }
-    .header-buttons button {
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .header-buttons button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
@@ -196,10 +178,10 @@
   <div class="header">
     <h1 class="text-xl font-bold text-gold-500">منصة الدريز الرقمية</h1>
     <div class="header-buttons">
-      <button id="newsButton" class="bg-blue-600 text-white hover:bg-blue-700">
+      <button id="newsButton">
         المستجدات
       </button>
-      <button id="feedbackButton" class="bg-purple-600 text-white hover:bg-purple-700">
+      <button id="feedbackButton">
         المقترحات والآراء
       </button>
     </div>

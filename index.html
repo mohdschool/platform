@@ -300,8 +300,8 @@
         math5_9: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTDtoNYA9iUQr0Pjk0_hPIFYUFsDricAMFeeHnQ7ozlE3Mun2w2r7ezXT1MmH9-r-vCKSES_5kihPTr/pub?gid=0&single=true&output=csv",
         math10: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtOrt04XkbLCsuQTQhSpuxaxKQmJ_NF_ThauuSYBlNoQEWkEPs8xWUcDYDUQcctAXelNeFZxR4-uqZ/pub?gid=0&single=true&output=csv",
         english5_9: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSFFnnz9YGNyyOd0Nd2c2cKCEQoElKl9u5XXIKApL-XV3qucYI-0j-S43_OsF-X8Hhtwj3NaEy7LpeL/pub?gid=0&single=true&output=csv",
-        english10: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSKhbG0SfWfab6k5v1rPy5DPa9w-6vgcrVTXm_yZr7QmfLOJi6tAOcAQVeKhztfXO9FtB5Px0e5Y6qb/pub?gid=0&single=true&output=csv"
-        
+        english10: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSKhbG0SfWfab6k5v1rPy5DPa9w-6vgcrVTXm_yZr7QmfLOJi6tAOcAQVeKhztfXO9FtB5Px0e5Y6qb/pub?gid=0&single=true&output=csv",
+        science: "https://docs.google.com/spreadsheets/d/e/2PACX-1vShML8jSszGxHx6ESzcgf1DTYyPAvpeiYfhEt_6lxQ6xRBAeqbMa2blTI9lZVRXX-M5FNjAF4oRmLeY/pub?gid=0&single=true&output=csv"
       };
 
       resultDiv.innerHTML = '<p class="text-blue-400 font-semibold">🔄 جاري تحميل البيانات...</p>';
@@ -334,7 +334,7 @@
 
         resultDiv.innerHTML = dataHTML;
 
-} catch (error) {
+      } catch (error) {
         resultDiv.innerHTML = '<p class="text-red-400 font-semibold">⚠️ حدث خطأ أثناء تحميل البيانات.</p>';
       }
     });

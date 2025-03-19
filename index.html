@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;700&display=swap" rel="stylesheet">
   <style>
-  body {
+ body {
       background: linear-gradient(135deg, #1e3c72, #2a5298);
       font-family: 'El Messiri', sans-serif;
       color: #fff;
@@ -158,7 +158,7 @@
       background: rgba(255, 255, 255, 0.9);
       border-radius: 12px;
       padding: 20px;
-      max-width: 500px;
+      max-width: 400px;
       width: 90%;
       text-align: center;
     }
@@ -180,23 +180,6 @@
       font-weight: bold;
       border: none;
       cursor: pointer;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-    th, td {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-      text-align: center;
-    }
-    th {
-      background-color: #f2f2f2;
-      color: #1e3c72;
-    }
-    tr:hover {
-      background-color: #f5f5f5;
     }
 
     /* تحسين ألوان الجدول */
@@ -233,6 +216,10 @@
       z-index: 1;
       border-radius: 8px;
       overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(-10px);
+      right: 0; /* لجعل القائمة تظهر من اليمين */
     }
     .dropdown-content button {
       color: #1e3c72;
@@ -248,8 +235,21 @@
     .dropdown-content button:hover {
       background-color: rgba(255, 255, 255, 0.7);
     }
-    .dropdown:hover .dropdown-content {
+    .dropdown.active .dropdown-content {
       display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* تحسين عرض القائمة على الشاشات الصغيرة */
+    @media (max-width: 768px) {
+      .dropdown-content {
+        position: fixed;
+        top: 60px; /* تباعد من الأعلى */
+        right: 10px; /* تباعد من اليمين */
+        width: 90%; /* عرض القائمة */
+        max-width: 200px; /* أقصى عرض */
+      }
     }
   </style>
 </head>
@@ -259,12 +259,13 @@
     <h1 class="text-xl font-bold text-gold-500">منصة تواصل</h1>
     <div class="header-buttons">
       <div class="dropdown">
-        <button class="dropdown-toggle">القائمة ☰</button>
+        <button class="dropdown-toggle" onclick="toggleDropdown()">القائمة ☰</button>
         <div class="dropdown-content">
           <button id="newsButton">المستجدات</button>
           <button id="feedbackButton">المقترحات والآراء</button>
           <button id="behaviorButton">منصة السلوك</button>
           <button id="scheduleButton">التوقيت الزمني للحصص</button>
+          <button id="certificateButton">منصة الشهادات</button>
         </div>
       </div>
     </div>
@@ -314,11 +315,6 @@
     <!-- عرض النتائج -->
     <div id="result" class="mt-8 text-right"></div>
 
-    <!-- زر الشهادات -->
-    <button id="certificateButton" class="w-full py-3 rounded-lg button-certificate mt-6 focus:outline-none">
-      بوابة استعلام الشهادات
-    </button>
-
     <!-- تذييل المنصة -->
     <div class="footer">
       جميع الحقوق محفوظة © لإدارة مدرسة محمد بن سليمان الغافري
@@ -345,61 +341,41 @@
       <table>
         <thead>
           <tr>
-            <th>الحصة</th
-            <th>المدة </th>  
-            <th>الزمن (من)</th>
-            <th> ( إلى)</th>
+            <th>الحصة</th>
+            <th>الزمن (من - إلى)</th>
+            <th>الطابور (10 دقائق)</th>
           </tr>
         </thead>
         <tbody>
-          
-          <tr>
-            <td>الطابور</td>
-             <td>10 دقيقة</td>
-            <td>7:30 </td>
-            <td> 7:40</td>
-        
           <tr>
             <td>الحصة الأولى</td>
-            <td> 35 دقيقة</td>
-            <td>7:40</td>
-            <td>8:15</td>
+            <td>7:40 - 8:20</td>
+            <td>7:30 - 7:40</td>
           </tr>
           <tr>
             <td>الحصة الثانية</td>
-            <td>35 دقيقة </td>
-            <td>8:15</td>
-            <td>8:50</td>
+            <td>8:30 - 9:10</td>
+            <td>-</td>
           </tr>
           <tr>
             <td>الحصة الثالثة</td>
-              <td>35 دقيقة </td>
-            <td>8:50</td>
-            <td>9:25</td>
+            <td>9:20 - 10:00</td>
+            <td>-</td>
           </tr>
           <tr>
             <td>الحصة الرابعة</td>
-            <td>35 دقيقة </td>
-            <td>9:25</td>
-            <td>10:00</td>
+            <td>10:10 - 10:50</td>
+            <td>-</td>
           </tr>
           <tr>
-            <td>الفسحة </td>
-            <td>10 دقائق </td>
-            <td>10:00 </td>
-            <td>10:10</td>
-          </tr>
-            <tr>
-           <td>الحصة الخامسة </td>
-            <td>35 دقيقة </td>
-            <td>10:10 </td>
-            <td>10:45</td>
+            <td>الحصة الخامسة</td>
+            <td>11:00 - 11:40</td>
+            <td>-</td>
           </tr>
           <tr>
             <td>الحصة السادسة</td>
-            <td>35 دقيقة </td>
-            <td>10:45 </td>
-            <td>11:20</td>
+            <td>11:50 - 12:30</td>
+            <td>-</td>
           </tr>
         </tbody>
       </table>
@@ -410,6 +386,186 @@
   </div>
 
   <script>
+    // وظيفة لفتح وإغلاق القائمة المنسدلة
+    function toggleDropdown() {
+      const dropdown = document.querySelector('.dropdown');
+      dropdown.classList.toggle('active');
+    }
+
+    // إغلاق القائمة المنسدلة عند النقر خارجها
+    document.addEventListener('click', (event) => {
+      const dropdown = document.querySelector('.dropdown');
+      if (!dropdown.contains(event.target)) {
+        dropdown.classList.remove('active');
+      }
+    });
+
+    // فتح نافذة المستجدات
+    document.getElementById('newsButton').addEventListener('click', () => {
+      document.getElementById('newsModal').style.display = 'flex';
+    });
+
+    // إغلاق نافذة المستجدات
+    document.getElementById('closeModalButton').addEventListener('click', () => {
+      document.getElementById('newsModal').style.display = 'none';
+    });
+
+    // فتح رابط المقترحات والآراء
+    document.getElementById('feedbackButton').addEventListener('click', () => {
+      window.open("https://docs.google.com/forms/d/e/1FAIpQLScxSf0YQ5K1OyJhwh-LuzHlYD7qPlMi6wRRHai7hYWEF3Z1cg/viewform?usp=header", "_blank");
+    });
+
+    // فتح رابط منصة السلوك
+    document.getElementById('behaviorButton').addEventListener('click', () => {
+      window.open("https://mohdschool.github.io/behavior/", "_blank");
+    });
+
+    // فتح نافذة الجدول الزمني للحصص
+    document.getElementById('scheduleButton').addEventListener('click', () => {
+      document.getElementById('scheduleModal').style.display = 'flex';
+    });
+
+    // إغلاق نافذة الجدول الزمني للحصص
+    document.getElementById('closeScheduleModalButton').addEventListener('click', () => {
+      document.getElementById('scheduleModal').style.display = 'none';
+    });
+
+    // فتح رابط الشهادات
+    document.getElementById('certificateButton').addEventListener('click', () => {
+      window.open("https://mohdschool.github.io/certificate/", "_blank");
+    });
+
+    // عرض بيانات الطالب
+    document.getElementById('fetchDataButton').addEventListener('click', async () => {
+      const studentId = document.getElementById('studentId').value.trim();
+      const subject = document.getElementById('subjectSelect').value;
+      const resultDiv = document.getElementById('result');
+
+      if (!studentId || !subject) {
+        alert('يرجى إدخال رقم الطالب واختيار المادة.');
+        return;
+      }
+
+      const subjectLinks = {
+        social: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSFIgBQBnhabaxHKHqfKQCXqo1CINVKlZt10oI4nH5enwnXTeuMAOYxIdCbZPmdr2DlNBXjpolxCqFU/pub?gid=0&single=true&output=csv",
+        islamic: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTziRUgn9KjIrOgSxrUuMNHMd1QUkVmaQKC7iBBaX4h355nCOW92woD3mIkfMHhgJ2JACjIEnDRgSYJ/pub?gid=0&single=true&output=csv",
+        arabic5_9: "https://docs.google.com/spreadsheets/d/e/2PACX-1vThjpWAjLmwDFHb3Ub_gBZdd5HnUlq7DgTR2RQR9ontGqrylOHHq7lSCEaka8fu50VkH5OHk6hvX9A1/pub?gid=0&single=true&output=csv",
+        arabic10: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTM6iQR-4fnD9KYBOpbcOfvXO7-a88-K6q92ZFB3qdGq583nFjMoMegW8MULOoybDsSIr1mNU6RvsuN/pub?gid=0&single=true&output=csv",
+        math5_9: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTDtoNYA9iUQr0Pjk0_hPIFYUFsDricAMFeeHnQ7ozlE3Mun2w2r7ezXT1MmH9-r-vCKSES_5kihPTr/pub?gid=0&single=true&output=csv",
+        math10: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtOrt04XkbLCsuQTQhSpuxaxKQmJ_NF_ThauuSYBlNoQEWkEPs8xWUcDYDUQcctAXelNeFZxR4-uqZ/pub?gid=0&single=true&output=csv",
+        english5_9: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSFFnnz9YGNyyOd0Nd2c2cKCEQoElKl9u5XXIKApL-XV3qucYI-0j-S43_OsF-X8Hhtwj3NaEy7LpeL/pub?gid=0&single=true&output=csv",
+        english10: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSKhbG0SfWfab6k5v1rPy5DPa9w-6vgcrVTXm_yZr7QmfLOJi6tAOcAQVeKhztfXO9FtB5Px0e5Y6qb/pub?gid=0&single=true&output=csv",
+        physics: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfKq9UFhhb8P7cTX4mtlRwzku1F5xZuVMxq_Qmfn3j0yCefJwzjOIEj0CrYG9Je9ubAdRwXZusMuYr/pub?gid=0&single=true&output=csv",
+        science: "https://docs.google.com/spreadsheets/d/e/2PACX-1vShML8jSszGxHx6ESzcgf1DTYyPAvpeiYfhEt_6lxQ6xRBAeqbMa2blTI9lZVRXX-M5FNjAF4oRmLeY/pub?gid=0&single=true&output=csv",
+        chemistry: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRbz8zyGR6OwEPE8bZt6M22YtkiVdnhx2uuyBfUbMH6BW7725Tn5oHGlOcuGdxPPjw4dO-AJkaGW7ju/pub?gid=0&single=true&output=csv",
+        biology: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSk_TuS5L3YexPjYyLlIL6nHFAvkafQKGCYwwKw57vBo1FWF97RM5oSQPCVKZuWsD9egF5r9gErhzMn/pub?gid=0&single=true&output=csv"
+      };
+
+      resultDiv.innerHTML = '<p class="text-blue-400 font-semibold">🔄 جاري تحميل البيانات...</p>';
+
+      try {
+        const response = await fetch(subjectLinks[subject]);
+        const csvData = await response.text();
+        const rows = csvData.split('\n').map(row => row.split(','));
+
+        const headers = rows[0];
+        const studentRow = rows.find(row => row[1].trim() === studentId);
+
+        if (!studentRow) {
+          resultDiv.innerHTML = '<p class="text-red-400 font-semibold">❌ لم يتم العثور على بيانات لهذا الطالب.</p>';
+          return;
+        }
+
+        // إنشاء عرض عمودي للبيانات
+        let dataHTML = `<h2 class="text-xl font-bold text-gold-500 mb-6">📌 بيانات الطالب:</h2>`;
+        headers.forEach((header, index) => {
+          if (header && studentRow[index]) {
+            dataHTML += `
+              <div class="data-card">
+                <div class="data-title">${header}</div>
+                <div class="data-value">${studentRow[index]}</div>
+              </div>
+            `;
+          }
+        });
+
+        resultDiv.innerHTML = dataHTML;
+
+      } catch (error) {
+        resultDiv.innerHTML = '<p class="text-red-400 font-semibold">⚠️ حدث خطأ أثناء تحميل البيانات.</p>';
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+  <!-- نافذة الجدول الزمني للحصص -->
+  <div id="scheduleModal" class="modal">
+    <div class="modal-content">
+      <h2 class="text-xl font-bold text-gold-500 mb-6">🗓️ الجدول الزمني للحصص خلال شهر رمضان</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>الحصة</th>
+            <th>الزمن (من - إلى)</th>
+            <th>الطابور (10 دقائق)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>الحصة الأولى</td>
+            <td>7:40 - 8:20</td>
+            <td>7:30 - 7:40</td>
+          </tr>
+          <tr>
+            <td>الحصة الثانية</td>
+            <td>8:30 - 9:10</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>الحصة الثالثة</td>
+            <td>9:20 - 10:00</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>الحصة الرابعة</td>
+            <td>10:10 - 10:50</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>الحصة الخامسة</td>
+            <td>11:00 - 11:40</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>الحصة السادسة</td>
+            <td>11:50 - 12:30</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="closeScheduleModalButton" class="mt-6 w-full py-3 rounded-lg button-primary focus:outline-none">
+        إغلاق
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // وظيفة لفتح وإغلاق القائمة المنسدلة
+    function toggleDropdown() {
+      const dropdown = document.querySelector('.dropdown');
+      dropdown.classList.toggle('active');
+    }
+
+    // إغلاق القائمة المنسدلة عند النقر خارجها
+    document.addEventListener('click', (event) => {
+      const dropdown = document.querySelector('.dropdown');
+      if (!dropdown.contains(event.target)) {
+        dropdown.classList.remove('active');
+      }
+    });
+
     // فتح نافذة المستجدات
     document.getElementById('newsButton').addEventListener('click', () => {
       document.getElementById('newsModal').style.display = 'flex';

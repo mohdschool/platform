@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
+  body {
       background: linear-gradient(135deg, #1e3c72, #2a5298);
       font-family: 'El Messiri', sans-serif;
       color: #fff;
@@ -198,6 +198,59 @@
     tr:hover {
       background-color: #f5f5f5;
     }
+
+    /* تحسين ألوان الجدول */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+      color: #1e3c72;
+    }
+    th {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #ffd700;
+    }
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* قائمة منسدلة للأزرار */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.9);
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .dropdown-content button {
+      color: #1e3c72;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      width: 100%;
+      text-align: right;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+    .dropdown-content button:hover {
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
@@ -205,18 +258,15 @@
   <div class="header">
     <h1 class="text-xl font-bold text-gold-500">منصة تواصل</h1>
     <div class="header-buttons">
-      <button id="newsButton">
-        المستجدات
-      </button>
-      <button id="feedbackButton">
-        المقترحات والآراء
-      </button>
-      <button id="behaviorButton">
-        منصة السلوك
-      </button>
-      <button id="scheduleButton">
-        التوقيت الزمني للحصص
-      </button>
+      <div class="dropdown">
+        <button class="dropdown-toggle">القائمة ☰</button>
+        <div class="dropdown-content">
+          <button id="newsButton">المستجدات</button>
+          <button id="feedbackButton">المقترحات والآراء</button>
+          <button id="behaviorButton">منصة السلوك</button>
+          <button id="scheduleButton">التوقيت الزمني للحصص</button>
+        </div>
+      </div>
     </div>
   </div>
 

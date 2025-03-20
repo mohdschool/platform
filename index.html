@@ -266,12 +266,13 @@
           <button id="behaviorButton">منصة السلوك</button>
           <button id="scheduleButton">التوقيت الزمني للحصص</button>
           <button id="certificateButton">منصة الشهادات</button>
+          <button id="healthSchoolButton">مدرستنا معززة للصحة</button> <!-- الزر الجديد -->
         </div>
       </div>
     </div>
   </div>
 
-  <!-- البطاقة الرئيسية -->
+   <!-- البطاقة الرئيسية -->
   <div class="card rounded-lg shadow-2xl p-8 max-w-md w-full text-center mt-20">
     <!-- شعار المدرسة -->
     <img src="https://j.top4top.io/p_3327lje811.jpg" alt="شعار المدرسة" class="mx-auto w-28 h-28 rounded-full shadow-md mb-6 logo-glow">
@@ -464,6 +465,11 @@
     // فتح رابط الشهادات
     document.getElementById('certificateButton').addEventListener('click', () => {
       window.open("https://mohdschool.github.io/certificate/", "_blank");
+    });
+
+    // فتح رابط مدرستنا معززة للصحة
+    document.getElementById('healthSchoolButton').addEventListener('click', () => {
+      window.open("https://mohdschool.github.io/12A/", "_blank");
     });
 
     // عرض بيانات الطالب

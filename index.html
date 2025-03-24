@@ -267,8 +267,8 @@
           <button id="scheduleButton">التوقيت الزمني للحصص</button>
           <button id="certificateButton">منصة الشهادات</button>
           <button id="healthSchoolButton">مدرستنا معززة للصحة</button>
-          <!-- الزر الجديد -->
           <button id="timetableButton">جدول الحصص</button>
+          <button id="shortTest1Button">جدول اختبار قصير 1</button>
         </div>
       </div>
     </div>
@@ -476,6 +476,11 @@
     // فتح رابط جدول الحصص
     document.getElementById('timetableButton').addEventListener('click', () => {
       window.open("https://moh7211.edupage.org/timetable/", "_blank");
+    });
+
+    // فتح رابط جدول اختبار قصير 1
+    document.getElementById('shortTest1Button').addEventListener('click', () => {
+      window.open("https://mohdschool.github.io/7211/", "_blank");
     });
 
     // عرض بيانات الطالب

@@ -7,6 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       background: linear-gradient(135deg, #1e3c72, #2a5298);
@@ -143,6 +144,8 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
+    
+    /* تحسين النوافذ المنبثقة */
     .modal {
       display: none;
       position: fixed;
@@ -153,33 +156,75 @@
       background: rgba(0, 0, 0, 0.5);
       justify-content: center;
       align-items: center;
-    }
-    .modal-content {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
+      z-index: 2000;
       padding: 20px;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
+      box-sizing: border-box;
     }
+    
+    .modal-content {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      padding: 25px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 85vh;
+      overflow-y: auto;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      position: relative;
+      animation: modalFadeIn 0.3s ease-out;
+    }
+    
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    
     .modal-content h2 {
       color: #1e3c72;
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      font-weight: bold;
     }
+    
     .modal-content p {
       color: #333;
       font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      text-align: right;
     }
+    
     .modal-content button {
-      margin-top: 15px;
-      padding: 10px 20px;
+      margin-top: 20px;
+      padding: 12px 24px;
       border-radius: 8px;
       background: #4A90E2;
       color: #fff;
       font-weight: bold;
       border: none;
       cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .modal-content button:hover {
+      background: #3a80d2;
+      transform: translateY(-2px);
+    }
+    
+    .modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
 
     /* تحسين ألوان الجدول */
@@ -202,54 +247,223 @@
       background-color: rgba(255, 255, 255, 0.1);
     }
 
-    /* قائمة منسدلة للأزرار */
+    /* قائمة منسدلة للأزرار - التعديلات هنا */
     .dropdown {
       position: relative;
       display: inline-block;
     }
+    
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
     .dropdown-content {
       display: none;
-      position: absolute;
-      background-color: rgba(255, 255, 255, 0.9);
-      min-width: 160px;
-      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-      z-index: 1;
-      border-radius: 8px;
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background: linear-gradient(135deg, rgba(30, 60, 114, 0.95), rgba(42, 82, 152, 0.95));
+      backdrop-filter: blur(15px);
+      min-width: 280px;
+      max-height: 70vh; /* تحديد أقصى ارتفاع */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+      border-radius: 16px;
       overflow: hidden;
       opacity: 0;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      transform: translateY(-10px);
-      right: 0; /* لجعل القائمة تظهر من اليمين */
+      transform: translateY(-20px) scale(0.95);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 10px 0;
     }
+    
+    .dropdown-content::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      right: 20px;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, rgba(30, 60, 114, 0.95), rgba(42, 82, 152, 0.95));
+      transform: rotate(45deg);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .dropdown-menu {
+      max-height: 60vh; /* ارتفاع القائمة القابل للتمرير */
+      overflow-y: auto; /* تمكين التمرير الرأسي */
+      padding: 0 5px; /* مساحة جانبية صغيرة */
+    }
+    
+    /* تخصيص شريط التمرير */
+    .dropdown-menu::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .dropdown-menu::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+    
+    .dropdown-menu::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+    }
+    
+    .dropdown-menu::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+    
     .dropdown-content button {
-      color: #1e3c72;
-      padding: 12px 16px;
+      color: #fff;
+      padding: 14px 20px;
       text-decoration: none;
-      display: block;
+      display: flex;
+      align-items: center;
       width: 100%;
       text-align: right;
       border: none;
       background: none;
       cursor: pointer;
+      font-family: 'El Messiri', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      margin: 2px 0;
     }
+    
+    .dropdown-content button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: right 0.5s ease;
+    }
+    
+    .dropdown-content button:hover::before {
+      right: 100%;
+    }
+    
     .dropdown-content button:hover {
-      background-color: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.1);
+      padding-right: 30px;
+      transform: translateX(-5px);
     }
+    
+    .dropdown-content button i {
+      margin-left: 10px;
+      font-size: 1.2rem;
+      width: 24px;
+      text-align: center;
+    }
+    
     .dropdown.active .dropdown-content {
       display: block;
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
+    }
+    
+    .dropdown-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .dropdown.active ~ .dropdown-overlay {
+      display: block;
+      opacity: 1;
     }
 
     /* تحسين عرض القائمة على الشاشات الصغيرة */
     @media (max-width: 768px) {
       .dropdown-content {
-        position: fixed;
-        top: 60px; /* تباعد من الأعلى */
-        right: 10px; /* تباعد من اليمين */
-        width: 90%; /* عرض القائمة */
-        max-width: 200px; /* أقصى عرض */
+        right: 10px;
+        left: 10px;
+        width: auto;
+        min-width: unset;
+        max-height: 80vh; /* زيادة الارتفاع على الشاشات الصغيرة */
       }
+      
+      .dropdown-content::before {
+        right: 20px;
+      }
+      
+      .dropdown-menu {
+        max-height: 70vh; /* زيادة ارتفاع القائمة القابلة للتمرير */
+      }
+      
+      .modal-content {
+        padding: 20px 15px;
+        max-height: 90vh;
+      }
+    }
+    
+    /* تأثيرات إضافية */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate-fadeInUp {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+    
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    
+    .dropdown.active .stagger-item:nth-child(1) { animation: fadeInUp 0.3s 0.1s ease forwards; }
+    .dropdown.active .stagger-item:nth-child(2) { animation: fadeInUp 0.3s 0.15s ease forwards; }
+    .dropdown.active .stagger-item:nth-child(3) { animation: fadeInUp 0.3s 0.2s ease forwards; }
+    .dropdown.active .stagger-item:nth-child(4) { animation: fadeInUp 0.3s 0.25s ease forwards; }
+    .dropdown.active .stagger-item:nth-child(5) { animation: fadeInUp 0.3s 0.3s ease forwards; }
+    .dropdown.active .stagger-item:nth-child(6) { animation: fadeInUp 0.3s 0.35s ease forwards; }
+    .dropdown.active .stagger-item:nth-child(7) { animation: fadeInUp 0.3s 0.4s ease forwards; }
+    .dropdown.active .stagger-item:nth-child(8) { animation: fadeInUp 0.3s 0.45s ease forwards; }
+    .dropdown.active .stagger-item:nth-child(9) { animation: fadeInUp 0.3s 0.5s ease forwards; }
+    .dropdown.active .stagger-item:nth-child(10) { animation: fadeInUp 0.3s 0.55s ease forwards; }
+    .dropdown.active .stagger-item:nth-child(11) { animation: fadeInUp 0.3s 0.6s ease forwards; }
+    .dropdown.active .stagger-item:nth-child(12) { animation: fadeInUp 0.3s 0.65s ease forwards; }
+    
+    /* مؤشر السحب */
+    .drag-indicator {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 2px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .dropdown-content:hover .drag-indicator {
+      opacity: 1;
     }
   </style>
 </head>
@@ -259,27 +473,53 @@
     <h1 class="text-xl font-bold text-gold-500">منصة تواصل</h1>
     <div class="header-buttons">
       <div class="dropdown">
-        <button class="dropdown-toggle" onclick="toggleDropdown()">القائمة ☰</button>
+        <button class="dropdown-toggle" onclick="toggleDropdown()">
+          <i class="fas fa-bars"></i> القائمة
+        </button>
         <div class="dropdown-content">
-          <button id="newsButton">الترحيب</button>
-          <button id="feedbackButton">المقترحات والآراء</button>
-          <button id="behaviorButton">منصة السلوك</button>
-          <button id="scheduleButton">التوقيت الزمني للحصص</button>
-         <button id="shortTest1Button">جدول متابعة الامتحانات القصيرة </button>
-           <button id="moh">جدول إختبارات نهاية الفصل الدراسي الأول</button>
-          <button id="certificateButton">منصة الشهادات</button>
-          <button id="healthSchoolButton">مدرستنا معززة للصحة</button>
-          <button id="timetableButton">جدول الحصص</button>
-
-           <button id="ebdaa3">إبداعات معلمي مدرسة محمد بن سليمان الغافري </button>
-          
-
-          <button id="noorPlatformButton">منصة نور</button>
+          <div class="dropdown-menu">
+            <button id="newsButton" class="stagger-item">
+              <i class="fas fa-handshake"></i> الترحيب
+            </button>
+            <button id="feedbackButton" class="stagger-item">
+              <i class="fas fa-comments"></i> المقترحات والآراء
+            </button>
+            <button id="behaviorButton" class="stagger-item">
+              <i class="fas fa-chart-line"></i> منصة السلوك
+            </button>
+            <button id="scheduleButton" class="stagger-item">
+              <i class="fas fa-clock"></i> التوقيت الزمني للحصص
+            </button>
+            <button id="shortTest1Button" class="stagger-item">
+              <i class="fas fa-calendar-alt"></i> جدول متابعة الامتحانات القصيرة
+            </button>
+            <button id="moh" class="stagger-item">
+              <i class="fas fa-file-alt"></i> جدول إختبارات نهاية الفصل الدراسي الأول
+            </button>
+            <button id="certificateButton" class="stagger-item">
+              <i class="fas fa-award"></i> منصة الشهادات
+            </button>
+            <button id="healthSchoolButton" class="stagger-item">
+              <i class="fas fa-heartbeat"></i> مدرستنا معززة للصحة
+            </button>
+            <button id="timetableButton" class="stagger-item">
+              <i class="fas fa-table"></i> جدول الحصص
+            </button>
+            <button id="ebdaa3" class="stagger-item">
+              <i class="fas fa-lightbulb"></i> إبداعات معلمي مدرسة محمد بن سليمان الغافري
+            </button>
+            <button id="noorPlatformButton" class="stagger-item">
+              <i class="fas fa-graduation-cap"></i> منصة نور
+            </button>
+          </div>
+          <div class="drag-indicator"></div>
         </div>
       </div>
+      <div class="dropdown-overlay" onclick="toggleDropdown()"></div>
     </div>
   </div>
-   <!-- البطاقة الرئيسية -->
+  
+  <!-- البطاقة الرئيسية -->
   <div class="card rounded-lg shadow-2xl p-8 max-w-md w-full text-center mt-20">
     <!-- شعار المدرسة -->
     <img src="https://j.top4top.io/p_3327lje811.jpg" alt="شعار المدرسة" class="mx-auto w-28 h-28 rounded-full shadow-md mb-6 logo-glow">
@@ -331,6 +571,7 @@
 
   <!-- نافذة الترحيب -->
   <div id="newsModal" class="modal">
+    <div class="modal-overlay" id="newsModalOverlay"></div>
     <div class="modal-content">
       <h2>🌟 مرحبًا بكم في منصة تواصل 🌟</h2>
       <p>إلى شركائنا في بناء هذا الصرح التعليمي الشامخ (<strong>أولياء أمور طلابنا الكرام</strong>) وإلى أبطال مدرستنا طلابنا النجباء الذين يشكلون بوصلتنا نحو المستقبل…</p>
@@ -344,6 +585,7 @@
 
   <!-- نافذة الجدول الزمني للحصص -->
   <div id="scheduleModal" class="modal">
+    <div class="modal-overlay" id="scheduleModalOverlay"></div>
     <div class="modal-content">
       <h2 class="text-xl font-bold text-gold-500 mb-6">🗓️ الجدول الزمني للحصص الدراسية  </h2>
       <table>
@@ -434,7 +676,8 @@
     // إغلاق القائمة المنسدلة عند النقر خارجها
     document.addEventListener('click', (event) => {
       const dropdown = document.querySelector('.dropdown');
-      if (!dropdown.contains(event.target)) {
+      const dropdownToggle = document.querySelector('.dropdown-toggle');
+      if (!dropdown.contains(event.target) && event.target !== dropdownToggle) {
         dropdown.classList.remove('active');
       }
     });
@@ -442,65 +685,86 @@
     // فتح نافذة المستجدات
     document.getElementById('newsButton').addEventListener('click', () => {
       document.getElementById('newsModal').style.display = 'flex';
+      document.querySelector('.dropdown').classList.remove('active');
     });
 
     // إغلاق نافذة المستجدات
     document.getElementById('closeModalButton').addEventListener('click', () => {
       document.getElementById('newsModal').style.display = 'none';
     });
+    
+    // إغلاق نافذة الترحيب عند النقر خارجها
+    document.getElementById('newsModalOverlay').addEventListener('click', () => {
+      document.getElementById('newsModal').style.display = 'none';
+    });
 
     // فتح رابط المقترحات والآراء
     document.getElementById('feedbackButton').addEventListener('click', () => {
       window.open("https://docs.google.com/forms/d/e/1FAIpQLScxSf0YQ5K1OyJhwh-LuzHlYD7qPlMi6wRRHai7hYWEF3Z1cg/viewform?usp=header", "_blank");
+      document.querySelector('.dropdown').classList.remove('active');
     });
 
     // فتح رابط منصة السلوك
     document.getElementById('behaviorButton').addEventListener('click', () => {
       window.open("https://mohdschool.github.io/behavior/", "_blank");
+      document.querySelector('.dropdown').classList.remove('active');
     });
 
     // فتح نافذة الجدول الزمني للحصص
     document.getElementById('scheduleButton').addEventListener('click', () => {
       document.getElementById('scheduleModal').style.display = 'flex';
+      document.querySelector('.dropdown').classList.remove('active');
     });
 
     // إغلاق نافذة الجدول الزمني للحصص
     document.getElementById('closeScheduleModalButton').addEventListener('click', () => {
       document.getElementById('scheduleModal').style.display = 'none';
     });
+    
+    // إغلاق نافذة الجدول الزمني للحصص عند النقر خارجها
+    document.getElementById('scheduleModalOverlay').addEventListener('click', () => {
+      document.getElementById('scheduleModal').style.display = 'none';
+    });
 
     // فتح رابط الشهادات
     document.getElementById('certificateButton').addEventListener('click', () => {
       window.open("https://mohdschool.github.io/certificate/", "_blank");
+      document.querySelector('.dropdown').classList.remove('active');
     });
 
     // فتح رابط مدرستنا معززة للصحة
     document.getElementById('healthSchoolButton').addEventListener('click', () => {
       window.open("https://mohdschool.github.io/12A/", "_blank");
+      document.querySelector('.dropdown').classList.remove('active');
     });
 
     // فتح رابط جدول الحصص
     document.getElementById('timetableButton').addEventListener('click', () => {
       window.open("https://moh7211.edupage.org/timetable/", "_blank");
+      document.querySelector('.dropdown').classList.remove('active');
     });
 
     // فتح رابط جدول اختبار قصير 1
     document.getElementById('shortTest1Button').addEventListener('click', () => {
       window.open("https://mohdschool.github.io/7211/", "_blank");
+      document.querySelector('.dropdown').classList.remove('active');
     });
       // فتح رابط إبداعات معلمي مدرسة محمد بن سليمان 
     document.getElementById('ebdaa3').addEventListener('click', () => {
       window.open("https://mohdschool.github.io/ebdaa3/", "_blank");
+      document.querySelector('.dropdown').classList.remove('active');
     });
   // فتح رابط الجدول اليومي لدبلوم التعليم العام
     document.getElementById('moh').addEventListener('click', () => {
       window.open("https://mohdschool.github.io/Finalexams/", "_blank");
+      document.querySelector('.dropdown').classList.remove('active');
     });
 
 
     // فتح رابط منصة نور
     document.getElementById('noorPlatformButton').addEventListener('click', () => {
       window.open("https://lms.moe.gov.om/", "_blank");
+      document.querySelector('.dropdown').classList.remove('active');
     });
 
     // عرض بيانات الطالب
@@ -567,11 +831,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-

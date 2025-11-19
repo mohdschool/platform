@@ -88,6 +88,17 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
+    .button-featured {
+      background: linear-gradient(135deg, #ffd700, #ffed4e);
+      color: #1e3c72;
+      font-weight: bold;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 2px solid rgba(255, 215, 0, 0.5);
+    }
+    .button-featured:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 25px rgba(255, 215, 0, 0.3);
+    }
     .success-message {
       background: rgba(76, 175, 80, 0.2);
       border: 1px solid rgba(76, 175, 80, 0.5);
@@ -176,6 +187,18 @@
     .data-value {
       color: #fff;
       font-size: 1.1rem;
+    }
+    .featured-buttons {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+      border-radius: 20px;
+      padding: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 30px;
+    }
+    .featured-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
     }
   </style>
 </head>
@@ -295,21 +318,67 @@
               <span>🌟 مدرسة محمد بن سليمان الغافري ترحب بكم، حيث تتجدد الأفكار وتتغير الطرق، ويبقى الهدف ثابتًا واضحًا جليًا: التقدم بخطوات ثابتة نحو آفاق التقدم المعرفي بأحدث الأساليب والتقنيات. 🌟</span>
             </div>
 
+            <!-- الأزرار الرئيسية في الواجهة -->
+            <div class="featured-buttons">
+              <h2 class="text-2xl font-bold text-gold-500 mb-8 text-center">الخدمات الرئيسية</h2>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- زر الترحيب -->
+                <div class="text-center">
+                  <div class="featured-icon">
+                    <i class="fas fa-handshake text-gold-500"></i>
+                  </div>
+                  <h3 class="text-xl font-bold mb-4">نرحب بكم</h3>
+                  <p class="text-gray-300 mb-4">تعرف على رسالتنا ورؤيتنا التعليمية</p>
+                  <button onclick="showWelcomeMessage()" class="button-featured w-full py-4 rounded-lg">
+                    <i class="fas fa-star mr-2"></i>
+                    رسالة الترحيب
+                  </button>
+                </div>
+
+                <!-- زر استفسار الدرجات -->
+                <div class="text-center">
+                  <div class="featured-icon">
+                    <i class="fas fa-chart-line text-gold-500"></i>
+                  </div>
+                  <h3 class="text-xl font-bold mb-4">استفسار الدرجات</h3>
+                  <p class="text-gray-300 mb-4">اطلع على نتائجك الدراسية بسهولة</p>
+                  <button onclick="showSection('grades')" class="button-featured w-full py-4 rounded-lg">
+                    <i class="fas fa-search mr-2"></i>
+                    استعلام الدرجات
+                  </button>
+                </div>
+
+                <!-- زر المقترحات -->
+                <div class="text-center">
+                  <div class="featured-icon">
+                    <i class="fas fa-comments text-gold-500"></i>
+                  </div>
+                  <h3 class="text-xl font-bold mb-4">المقترحات والآراء</h3>
+                  <p class="text-gray-300 mb-4">شاركنا آراءك لتطوير المدرسة</p>
+                  <button onclick="openSuggestionsPage()" class="button-featured w-full py-4 rounded-lg">
+                    <i class="fas fa-paper-plane mr-2"></i>
+                    قدم مقترحك
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- الخدمات الأخرى -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
               <div class="card p-6 text-center">
-                <i class="fas fa-graduation-cap text-4xl text-gold-500 mb-4"></i>
-                <h3 class="text-xl font-bold mb-2">استفسار الدرجات</h3>
-                <p class="text-gray-300">اطلع على نتائجك الدراسية بسهولة وسرعة</p>
-              </div>
-              <div class="card p-6 text-center">
-                <i class="fas fa-comments text-4xl text-gold-500 mb-4"></i>
-                <h3 class="text-xl font-bold mb-2">المقترحات</h3>
-                <p class="text-gray-300">شاركنا آراءك ومقترحاتك لتطوير المدرسة</p>
+                <i class="fas fa-chart-bar text-4xl text-gold-500 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">منصة السلوك</h3>
+                <p class="text-gray-300">تابع سلوك الطلاب وتقارير الأداء</p>
               </div>
               <div class="card p-6 text-center">
                 <i class="fas fa-calendar text-4xl text-gold-500 mb-4"></i>
                 <h3 class="text-xl font-bold mb-2">الجدول الدراسي</h3>
                 <p class="text-gray-300">تعرف على مواعيد الحصص والامتحانات</p>
+              </div>
+              <div class="card p-6 text-center">
+                <i class="fas fa-award text-4xl text-gold-500 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">الشهادات</h3>
+                <p class="text-gray-300">احصل على شهاداتك الإلكترونية</p>
               </div>
             </div>
           </div>
@@ -359,11 +428,10 @@
           </div>
         </div>
 
-        <!-- قسم المقترحات والآراء -->
+        <!-- باقي الأقسام (نفس الكود السابق) -->
         <div id="suggestions" class="content-section">
           <div class="card p-8">
             <h2 class="text-3xl font-bold text-gold-500 text-center mb-8">المقترحات والآراء</h2>
-            <!-- سيتم تحميل محتوى المقترحات هنا -->
             <div class="text-center">
               <p class="text-xl mb-6">نرحب بآرائكم ومقترحاتكم لتطوير مدرستنا</p>
               <button onclick="openSuggestionsPage()" class="button-primary px-8 py-3 rounded-lg">
@@ -374,7 +442,7 @@
           </div>
         </div>
 
-        <!-- الأقسام الأخرى -->
+        <!-- الأقسام الأخرى (نفس الكود السابق) -->
         <div id="behavior" class="content-section">
           <div class="card p-8 text-center">
             <h2 class="text-3xl font-bold text-gold-500 mb-6">منصة السلوك</h2>
@@ -461,6 +529,27 @@
     </div>
   </div>
 
+  <!-- نافذة الترحيب المنبثقة -->
+  <div id="welcomeModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="card p-8 max-w-2xl mx-4 max-h-[80vh] overflow-y-auto">
+      <button onclick="closeWelcomeModal()" class="absolute top-4 left-4 text-gray-500 hover:text-white text-2xl">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2 class="text-3xl font-bold text-gold-500 text-center mb-6">🌟 مرحباً بكم في منصة تواصل 🌟</h2>
+      <div class="text-right space-y-4 text-lg leading-8">
+        <p>إلى شركائنا في بناء هذا الصرح التعليمي الشامخ (<strong>أولياء أمور طلابنا الكرام</strong>) وإلى أبطال مدرستنا طلابنا النجباء الذين يشكلون بوصلتنا نحو المستقبل…</p>
+        <p>من هنا … من مدرسة محمد بن سليمان الغافري ننطلق برؤية واضحة ورسالة تحمل في طياتها طموحًا لا يعرف الحدود.</p>
+        <p>نقدم لكم منصتنا التعليمية (<strong>منصة تواصل</strong>) ليس كإضافة عابرة بل كدليلٍ حيّ على سعينا المستمر نحو التميز واستلهامًا لمسؤوليتنا المشتركة في تحقيق الريادة.</p>
+        <p>نحن لا نبحث عن مجرّد تصدر القوائم ولا نركض خلف أضواء الشهرة بل نطمح لأن تكون هذه المدرسة منارةً تعليميةً أولى في سلطنة عُمان لا لذاتها بل لأجل أبنائها ليحجزوا مواقعهم في مقدمة المشهد العلمي ، في أرقى الجامعات ، وفي أعظم الميادين الفكرية والمعرفية محليًا وعالميًا.</p>
+        <p class="text-center text-2xl font-bold text-gold-500 mt-6">نحن هنا لأن المستقبل يبدأ من هنا.</p>
+      </div>
+      <button onclick="closeWelcomeModal()" class="button-primary w-full mt-6 py-3 rounded-lg">
+        <i class="fas fa-check mr-2"></i>
+        فهمت، شكراً لك
+      </button>
+    </div>
+  </div>
+
   <script>
     // دالة عرض القسم المحدد
     function showSection(sectionId) {
@@ -481,6 +570,16 @@
       event.currentTarget.classList.add('active');
     }
 
+    // دالة عرض رسالة الترحيب
+    function showWelcomeMessage() {
+      document.getElementById('welcomeModal').classList.remove('hidden');
+    }
+
+    // دالة إغلاق نافذة الترحيب
+    function closeWelcomeModal() {
+      document.getElementById('welcomeModal').classList.add('hidden');
+    }
+
     // دالة التواصل عبر الواتساب
     function contactWhatsApp() {
       const phoneNumber = "0096895665009";
@@ -499,7 +598,7 @@
       window.open('suggestions.html', '_blank');
     }
 
-    // دالة استعلام الدرجات
+    // دالة استعلام الدرجات (نفس الكود السابق)
     async function fetchGrades() {
       const studentId = document.getElementById('studentId').value.trim();
       const subject = document.getElementById('subjectSelect').value;
@@ -577,4 +676,3 @@
   </script>
 </body>
 </html>
-

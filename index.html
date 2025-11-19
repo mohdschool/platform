@@ -297,6 +297,60 @@
         padding: 10px 6px;
       }
     }
+
+    /* تصميم جدول الاختبارات */
+    .exam-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .exam-table th,
+    .exam-table td {
+      padding: 12px 8px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .exam-table th {
+      background: rgba(255, 215, 0, 0.3);
+      color: #ffd700;
+      font-weight: bold;
+    }
+    
+    .exam-table tr:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .exam-table-container {
+      overflow-x: auto;
+      margin: 15px 0;
+    }
+
+    /* تصميم بطاقات الامتحانات */
+    .exam-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+      border-radius: 15px;
+      padding: 20px;
+      margin: 15px 0;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .exam-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+    
+    .exam-card h3 {
+      color: #ffd700;
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      text-align: center;
+    }
   </style>
 </head>
 <body class="min-h-screen">
@@ -336,20 +390,6 @@
               </div>
             </div>
 
-            <div class="menu-item" onclick="showSection('grades')">
-              <div class="flex flex-col items-center">
-                <i class="fas fa-chart-line text-xl mb-1"></i>
-                <span class="text-sm">استفسار الدرجات</span>
-              </div>
-            </div>
-
-            <div class="menu-item" onclick="showSection('suggestions')">
-              <div class="flex flex-col items-center">
-                <i class="fas fa-comments text-xl mb-1"></i>
-                <span class="text-sm">المقترحات والآراء</span>
-              </div>
-            </div>
-
             <div class="menu-item" onclick="showSection('behavior')">
               <div class="flex flex-col items-center">
                 <i class="fas fa-chart-bar text-xl mb-1"></i>
@@ -368,6 +408,20 @@
               <div class="flex flex-col items-center">
                 <i class="fas fa-calendar-alt text-xl mb-1"></i>
                 <span class="text-sm">جدول الامتحانات</span>
+              </div>
+            </div>
+
+            <div class="menu-item" onclick="showSection('certificates')">
+              <div class="flex flex-col items-center">
+                <i class="fas fa-award text-xl mb-1"></i>
+                <span class="text-sm">الشهادات</span>
+              </div>
+            </div>
+
+            <div class="menu-item" onclick="showSection('health')">
+              <div class="flex flex-col items-center">
+                <i class="fas fa-heartbeat text-xl mb-1"></i>
+                <span class="text-sm">المدرسة المعززة للصحة</span>
               </div>
             </div>
           </div>
@@ -511,6 +565,48 @@
           </div>
         </div>
 
+        <!-- قسم جدول الامتحانات -->
+        <div id="exams" class="content-section">
+          <div class="card p-6">
+            <h2 class="text-2xl font-bold text-gold-500 text-center mb-6">جدول الامتحانات</h2>
+            
+            <!-- بطاقة الامتحانات القصيرة -->
+            <div class="exam-card">
+              <h3 class="text-xl font-bold text-gold-500 mb-4 text-center">📅 جدول متابعة الامتحانات القصيرة</h3>
+              <p class="text-gray-300 text-center mb-4">لمشاهدة جدول الامتحانات القصيرة بشكل مفصل، يرجى الضغط على الزر أدناه</p>
+              <div class="text-center">
+                <button onclick="openShortExams()" class="button-primary px-6 py-3 rounded-lg text-sm">
+                  <i class="fas fa-external-link-alt mr-2"></i>
+                  عرض جدول الامتحانات القصيرة
+                </button>
+              </div>
+            </div>
+
+            <!-- بطاقة امتحانات نهاية الفصل -->
+            <div class="exam-card">
+              <h3 class="text-xl font-bold text-gold-500 mb-4 text-center">📝 جدول إختبارات نهاية الفصل الدراسي الأول</h3>
+              <p class="text-gray-300 text-center mb-4">لمشاهدة جدول امتحانات نهاية الفصل الدراسي الأول بشكل مفصل، يرجى الضغط على الزر أدناه</p>
+              <div class="text-center">
+                <button onclick="openFinalExams()" class="button-primary px-6 py-3 rounded-lg text-sm">
+                  <i class="fas fa-external-link-alt mr-2"></i>
+                  عرض جدول امتحانات نهاية الفصل
+                </button>
+              </div>
+            </div>
+
+            <!-- ملاحظة -->
+            <div class="bg-blue-500/20 border border-blue-500/50 rounded-lg p-4 mt-6">
+              <div class="flex items-start">
+                <i class="fas fa-info-circle text-blue-300 mt-1 mr-3"></i>
+                <div>
+                  <h4 class="text-blue-300 font-bold mb-2">ملاحظة هامة:</h4>
+                  <p class="text-sm text-blue-200">يتم تحديث جداول الامتحانات بشكل دوري. يرجى التأكد من زيارة الروابط أعلاه للحصول على أحدث التحديثات والتفاصيل الكاملة.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- باقي الأقسام -->
         <div id="behavior" class="content-section">
           <div class="card p-6 text-center">
@@ -532,18 +628,23 @@
           </div>
         </div>
 
-        <div id="exams" class="content-section">
+        <div id="certificates" class="content-section">
           <div class="card p-6 text-center">
-            <h2 class="text-2xl font-bold text-gold-500 mb-4">جدول الامتحانات</h2>
+            <h2 class="text-2xl font-bold text-gold-500 mb-4">الشهادات</h2>
             <p class="text-lg mb-4">سيتم تفعيل هذه الخدمة قريباً</p>
-            <div class="flex flex-col sm:flex-row gap-3 justify-center">
-              <button onclick="openExternal('https://mohdschool.github.io/7211/')" class="button-secondary px-4 py-2 rounded-lg text-sm">
-                امتحانات قصيرة
-              </button>
-              <button onclick="openExternal('https://mohdschool.github.io/Finalexams/')" class="button-secondary px-4 py-2 rounded-lg text-sm">
-                امتحانات نهائية
-              </button>
-            </div>
+            <button onclick="openExternal('https://mohdschool.github.io/certificate/')" class="button-secondary px-4 py-2 rounded-lg text-sm">
+              زيارة المنصة الحالية
+            </button>
+          </div>
+        </div>
+
+        <div id="health" class="content-section">
+          <div class="card p-6 text-center">
+            <h2 class="text-2xl font-bold text-gold-500 mb-4">المدرسة المعززة للصحة</h2>
+            <p class="text-lg mb-4">سيتم تفعيل هذه الخدمة قريباً</p>
+            <button onclick="openExternal('https://mohdschool.github.io/12A/')" class="button-secondary px-4 py-2 rounded-lg text-sm">
+              زيارة المنصة الحالية
+            </button>
           </div>
         </div>
 
@@ -559,28 +660,28 @@
         <span class="mobile-menu-text">الرئيسية</span>
       </div>
     </div>
-    <div class="mobile-menu-item" onclick="showMobileSection('grades')">
-      <div class="flex flex-col items-center">
-        <i class="fas fa-chart-line mobile-menu-icon"></i>
-        <span class="mobile-menu-text">الدرجات</span>
-      </div>
-    </div>
-    <div class="mobile-menu-item" onclick="showMobileSection('suggestions')">
-      <div class="flex flex-col items-center">
-        <i class="fas fa-comments mobile-menu-icon"></i>
-        <span class="mobile-menu-text">المقترحات</span>
-      </div>
-    </div>
     <div class="mobile-menu-item" onclick="showMobileSection('behavior')">
       <div class="flex flex-col items-center">
         <i class="fas fa-chart-bar mobile-menu-icon"></i>
         <span class="mobile-menu-text">السلوك</span>
       </div>
     </div>
+    <div class="mobile-menu-item" onclick="showMobileSection('exams')">
+      <div class="flex flex-col items-center">
+        <i class="fas fa-calendar-alt mobile-menu-icon"></i>
+        <span class="mobile-menu-text">الامتحانات</span>
+      </div>
+    </div>
     <div class="mobile-menu-item" onclick="showMobileSection('schedule')">
       <div class="flex flex-col items-center">
         <i class="fas fa-clock mobile-menu-icon"></i>
         <span class="mobile-menu-text">الجدول</span>
+      </div>
+    </div>
+    <div class="mobile-menu-item" onclick="showMobileSection('certificates')">
+      <div class="flex flex-col items-center">
+        <i class="fas fa-award mobile-menu-icon"></i>
+        <span class="mobile-menu-text">الشهادات</span>
       </div>
     </div>
   </div>
@@ -630,7 +731,9 @@
       document.getElementById(sectionId).classList.add('active');
       
       // تفعيل عنصر القائمة المحدد
-      event.currentTarget.classList.add('active');
+      if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+      }
       
       // تحديث قائمة الهاتف أيضاً
       updateMobileMenu(sectionId);
@@ -692,6 +795,16 @@
     // دالة فتح صفحة المقترحات
     function openSuggestionsPage() {
       window.open('suggestions.html', '_blank');
+    }
+
+    // دالة فتح جدول الامتحانات القصيرة
+    function openShortExams() {
+      window.open('https://mohdschool.github.io/7211/', '_blank');
+    }
+
+    // دالة فتح جدول امتحانات نهاية الفصل
+    function openFinalExams() {
+      window.open('https://mohdschool.github.io/Finalexams/', '_blank');
     }
 
     // دالة استعلام الدرجات

@@ -119,8 +119,8 @@
       background: rgba(255, 255, 255, 0.1);
       border: 2px solid transparent;
       border-radius: 15px;
-      padding: 20px;
-      margin: 10px 0;
+      padding: 15px;
+      margin: 8px 0;
       cursor: pointer;
       transition: all 0.3s ease;
       text-align: center;
@@ -128,7 +128,7 @@
     .menu-item:hover {
       background: rgba(255, 255, 255, 0.2);
       border-color: #ffd700;
-      transform: translateX(-10px);
+      transform: translateX(-5px);
     }
     .menu-item.active {
       background: rgba(255, 215, 0, 0.2);
@@ -157,12 +157,13 @@
       background: rgba(255, 255, 255, 0.1);
       padding: 10px;
       border-radius: 10px;
-      margin: 20px 0;
+      margin: 15px 0;
+      font-size: 0.9rem;
     }
     .marquee span {
       display: inline-block;
       padding-left: 100%;
-      animation: marquee 30s linear infinite;
+      animation: marquee 25s linear infinite;
     }
     @keyframes marquee {
       0% { transform: translateX(-100%); }
@@ -171,8 +172,8 @@
     .data-card {
       background: rgba(255, 255, 255, 0.1);
       border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 10px;
+      padding: 12px;
+      margin-bottom: 8px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .data-card:hover {
@@ -182,23 +183,119 @@
     .data-title {
       color: #ffd700;
       font-weight: bold;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
     .data-value {
       color: #fff;
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
     .featured-buttons {
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
       border-radius: 20px;
-      padding: 25px;
+      padding: 20px;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
     .featured-icon {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+      font-size: 2rem;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+    }
+    
+    /* تحسينات للهواتف */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(30, 60, 114, 0.95);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      z-index: 1000;
+      padding: 10px;
+    }
+    
+    .mobile-menu-item {
+      flex: 1;
+      text-align: center;
+      padding: 10px 5px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-item.active {
+      background: rgba(255, 215, 0, 0.3);
+    }
+    
+    .mobile-menu-icon {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    
+    .mobile-menu-text {
+      font-size: 0.7rem;
+    }
+    
+    /* تحسينات التجاوب */
+    @media (max-width: 768px) {
+      .container {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      
+      .mobile-menu {
+        display: flex;
+        justify-content: space-around;
+      }
+      
+      .desktop-menu {
+        display: none;
+      }
+      
+      .featured-buttons {
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+      
+      .featured-icon {
+        font-size: 1.8rem;
+      }
+      
+      .card {
+        margin-bottom: 15px;
+      }
+      
+      .button-featured {
+        padding: 12px 8px;
+        font-size: 0.9rem;
+      }
+      
+      .menu-item {
+        padding: 12px;
+        margin: 5px 0;
+      }
+      
+      .content-section {
+        margin-bottom: 70px; /* مساحة لقائمة الهاتف */
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .featured-buttons .grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+      }
+      
+      .marquee {
+        font-size: 0.8rem;
+        padding: 8px;
+      }
+      
+      .button-featured {
+        font-size: 0.85rem;
+        padding: 10px 6px;
+      }
     }
   </style>
 </head>
@@ -207,98 +304,70 @@
   <div class="header sticky top-0 z-50">
     <div class="container mx-auto px-4 py-3">
       <div class="flex justify-between items-center">
-        <div class="flex items-center space-x-4 space-x-reverse">
-          <img src="https://j.top4top.io/p_3327lje811.jpg" alt="شعار المدرسة" class="w-12 h-12 rounded-full logo-glow">
+        <div class="flex items-center space-x-3 space-x-reverse">
+          <img src="https://j.top4top.io/p_3327lje811.jpg" alt="شعار المدرسة" class="w-10 h-10 rounded-full logo-glow">
           <div>
-            <h1 class="text-xl font-bold text-gold-500">منصة تواصل</h1>
-            <p class="text-gray-300 text-sm">مدرسة محمد بن سليمان الغافري</p>
+            <h1 class="text-lg font-bold text-gold-500">منصة تواصل</h1>
+            <p class="text-gray-300 text-xs">مدرسة محمد بن سليمان الغافري</p>
           </div>
         </div>
-        <button onclick="contactWhatsApp()" class="button-whatsapp px-4 py-2 rounded-lg flex items-center space-x-2 space-x-reverse">
+        <button onclick="contactWhatsApp()" class="button-whatsapp px-3 py-2 rounded-lg flex items-center space-x-2 space-x-reverse text-sm">
           <i class="fab fa-whatsapp"></i>
-          <span>اتصل بنا</span>
+          <span class="hidden sm:inline">اتصل بنا</span>
         </button>
       </div>
     </div>
   </div>
 
   <!-- المحتوى الرئيسي -->
-  <div class="container mx-auto px-4 py-8">
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+  <div class="container mx-auto px-4 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
       
-      <!-- القائمة الجانبية -->
-      <div class="lg:col-span-1">
-        <div class="card p-6 sticky top-24">
-          <h2 class="text-2xl font-bold text-gold-500 text-center mb-6">القائمة الرئيسية</h2>
+      <!-- القائمة الجانبية للكمبيوتر -->
+      <div class="lg:col-span-1 desktop-menu">
+        <div class="card p-4 sticky top-24">
+          <h2 class="text-xl font-bold text-gold-500 text-center mb-4">القائمة الرئيسية</h2>
           
-          <div class="space-y-4">
+          <div class="space-y-3">
             <div class="menu-item active" onclick="showSection('welcome')">
               <div class="flex flex-col items-center">
-                <i class="fas fa-home text-2xl mb-2"></i>
-                <span>الرئيسية</span>
+                <i class="fas fa-home text-xl mb-1"></i>
+                <span class="text-sm">الرئيسية</span>
               </div>
             </div>
 
             <div class="menu-item" onclick="showSection('grades')">
               <div class="flex flex-col items-center">
-                <i class="fas fa-chart-line text-2xl mb-2"></i>
-                <span>استفسار الدرجات</span>
+                <i class="fas fa-chart-line text-xl mb-1"></i>
+                <span class="text-sm">استفسار الدرجات</span>
               </div>
             </div>
 
             <div class="menu-item" onclick="showSection('suggestions')">
               <div class="flex flex-col items-center">
-                <i class="fas fa-comments text-2xl mb-2"></i>
-                <span>المقترحات والآراء</span>
+                <i class="fas fa-comments text-xl mb-1"></i>
+                <span class="text-sm">المقترحات والآراء</span>
               </div>
             </div>
 
             <div class="menu-item" onclick="showSection('behavior')">
               <div class="flex flex-col items-center">
-                <i class="fas fa-chart-bar text-2xl mb-2"></i>
-                <span>منصة السلوك</span>
+                <i class="fas fa-chart-bar text-xl mb-1"></i>
+                <span class="text-sm">منصة السلوك</span>
               </div>
             </div>
 
             <div class="menu-item" onclick="showSection('schedule')">
               <div class="flex flex-col items-center">
-                <i class="fas fa-clock text-2xl mb-2"></i>
-                <span>جدول الحصص</span>
+                <i class="fas fa-clock text-xl mb-1"></i>
+                <span class="text-sm">جدول الحصص</span>
               </div>
             </div>
 
             <div class="menu-item" onclick="showSection('exams')">
               <div class="flex flex-col items-center">
-                <i class="fas fa-calendar-alt text-2xl mb-2"></i>
-                <span>جدول الامتحانات</span>
-              </div>
-            </div>
-
-            <div class="menu-item" onclick="showSection('certificates')">
-              <div class="flex flex-col items-center">
-                <i class="fas fa-award text-2xl mb-2"></i>
-                <span>الشهادات</span>
-              </div>
-            </div>
-
-            <div class="menu-item" onclick="showSection('health')">
-              <div class="flex flex-col items-center">
-                <i class="fas fa-heartbeat text-2xl mb-2"></i>
-                <span>المدرسة المعززة للصحة</span>
-              </div>
-            </div>
-
-            <div class="menu-item" onclick="showSection('creativity')">
-              <div class="flex flex-col items-center">
-                <i class="fas fa-lightbulb text-2xl mb-2"></i>
-                <span>إبداعات المعلمين</span>
-              </div>
-            </div>
-
-            <div class="menu-item" onclick="showSection('noor')">
-              <div class="flex flex-col items-center">
-                <i class="fas fa-graduation-cap text-2xl mb-2"></i>
-                <span>منصة نور</span>
+                <i class="fas fa-calendar-alt text-xl mb-1"></i>
+                <span class="text-sm">جدول الامتحانات</span>
               </div>
             </div>
           </div>
@@ -310,27 +379,27 @@
         
         <!-- قسم الترحيب -->
         <div id="welcome" class="content-section active">
-          <div class="card p-8 text-center">
-            <h1 class="text-4xl font-bold text-gold-500 mb-6">مرحباً بكم في منصة تواصل</h1>
-            <p class="text-xl text-gray-300 mb-8">منصة شاملة لخدمات مدرسة محمد بن سليمان الغافري</p>
+          <div class="card p-6 text-center">
+            <h1 class="text-2xl sm:text-3xl font-bold text-gold-500 mb-4">مرحباً بكم في منصة تواصل</h1>
+            <p class="text-lg text-gray-300 mb-6">منصة شاملة لخدمات مدرسة محمد بن سليمان الغافري</p>
             
             <div class="marquee">
-              <span>🌟 مدرسة محمد بن سليمان الغافري ترحب بكم، حيث تتجدد الأفكار وتتغير الطرق، ويبقى الهدف ثابتًا واضحًا جليًا: التقدم بخطوات ثابتة نحو آفاق التقدم المعرفي بأحدث الأساليب والتقنيات. 🌟</span>
+              <span>🌟 مدرسة محمد بن سليمان الغافري ترحب بكم 🌟</span>
             </div>
 
             <!-- الأزرار الرئيسية في الواجهة -->
             <div class="featured-buttons">
-              <h2 class="text-2xl font-bold text-gold-500 mb-8 text-center">الخدمات الرئيسية</h2>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <h2 class="text-xl font-bold text-gold-500 mb-6 text-center">الخدمات الرئيسية</h2>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <!-- زر الترحيب -->
                 <div class="text-center">
                   <div class="featured-icon">
                     <i class="fas fa-handshake text-gold-500"></i>
                   </div>
-                  <h3 class="text-xl font-bold mb-4">نرحب بكم</h3>
-                  <p class="text-gray-300 mb-4">تعرف على رسالتنا ورؤيتنا التعليمية</p>
-                  <button onclick="showWelcomeMessage()" class="button-featured w-full py-4 rounded-lg">
-                    <i class="fas fa-star mr-2"></i>
+                  <h3 class="text-lg font-bold mb-3">نرحب بكم</h3>
+                  <p class="text-gray-300 text-sm mb-3">تعرف على رسالتنا ورؤيتنا التعليمية</p>
+                  <button onclick="showWelcomeMessage()" class="button-featured w-full py-3 rounded-lg text-sm">
+                    <i class="fas fa-star mr-1"></i>
                     رسالة الترحيب
                   </button>
                 </div>
@@ -340,10 +409,10 @@
                   <div class="featured-icon">
                     <i class="fas fa-chart-line text-gold-500"></i>
                   </div>
-                  <h3 class="text-xl font-bold mb-4">استفسار الدرجات</h3>
-                  <p class="text-gray-300 mb-4">اطلع على نتائجك الدراسية بسهولة</p>
-                  <button onclick="showSection('grades')" class="button-featured w-full py-4 rounded-lg">
-                    <i class="fas fa-search mr-2"></i>
+                  <h3 class="text-lg font-bold mb-3">استفسار الدرجات</h3>
+                  <p class="text-gray-300 text-sm mb-3">اطلع على نتائجك الدراسية بسهولة</p>
+                  <button onclick="showSection('grades')" class="button-featured w-full py-3 rounded-lg text-sm">
+                    <i class="fas fa-search mr-1"></i>
                     استعلام الدرجات
                   </button>
                 </div>
@@ -353,10 +422,10 @@
                   <div class="featured-icon">
                     <i class="fas fa-comments text-gold-500"></i>
                   </div>
-                  <h3 class="text-xl font-bold mb-4">المقترحات والآراء</h3>
-                  <p class="text-gray-300 mb-4">شاركنا آراءك لتطوير المدرسة</p>
-                  <button onclick="openSuggestionsPage()" class="button-featured w-full py-4 rounded-lg">
-                    <i class="fas fa-paper-plane mr-2"></i>
+                  <h3 class="text-lg font-bold mb-3">المقترحات والآراء</h3>
+                  <p class="text-gray-300 text-sm mb-3">شاركنا آراءك لتطوير المدرسة</p>
+                  <button onclick="openSuggestionsPage()" class="button-featured w-full py-3 rounded-lg text-sm">
+                    <i class="fas fa-paper-plane mr-1"></i>
                     قدم مقترحك
                   </button>
                 </div>
@@ -364,21 +433,21 @@
             </div>
 
             <!-- الخدمات الأخرى -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-              <div class="card p-6 text-center">
-                <i class="fas fa-chart-bar text-4xl text-gold-500 mb-4"></i>
-                <h3 class="text-xl font-bold mb-2">منصة السلوك</h3>
-                <p class="text-gray-300">تابع سلوك الطلاب وتقارير الأداء</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+              <div class="card p-4 text-center">
+                <i class="fas fa-chart-bar text-3xl text-gold-500 mb-3"></i>
+                <h3 class="text-lg font-bold mb-2">منصة السلوك</h3>
+                <p class="text-gray-300 text-sm">تابع سلوك الطلاب وتقارير الأداء</p>
               </div>
-              <div class="card p-6 text-center">
-                <i class="fas fa-calendar text-4xl text-gold-500 mb-4"></i>
-                <h3 class="text-xl font-bold mb-2">الجدول الدراسي</h3>
-                <p class="text-gray-300">تعرف على مواعيد الحصص والامتحانات</p>
+              <div class="card p-4 text-center">
+                <i class="fas fa-calendar text-3xl text-gold-500 mb-3"></i>
+                <h3 class="text-lg font-bold mb-2">الجدول الدراسي</h3>
+                <p class="text-gray-300 text-sm">تعرف على مواعيد الحصص والامتحانات</p>
               </div>
-              <div class="card p-6 text-center">
-                <i class="fas fa-award text-4xl text-gold-500 mb-4"></i>
-                <h3 class="text-xl font-bold mb-2">الشهادات</h3>
-                <p class="text-gray-300">احصل على شهاداتك الإلكترونية</p>
+              <div class="card p-4 text-center">
+                <i class="fas fa-award text-3xl text-gold-500 mb-3"></i>
+                <h3 class="text-lg font-bold mb-2">الشهادات</h3>
+                <p class="text-gray-300 text-sm">احصل على شهاداتك الإلكترونية</p>
               </div>
             </div>
           </div>
@@ -386,29 +455,29 @@
 
         <!-- قسم استفسار الدرجات -->
         <div id="grades" class="content-section">
-          <div class="card p-8">
-            <h2 class="text-3xl font-bold text-gold-500 text-center mb-8">استفسار الدرجات</h2>
+          <div class="card p-6">
+            <h2 class="text-2xl font-bold text-gold-500 text-center mb-6">استفسار الدرجات</h2>
             
             <div class="max-w-md mx-auto">
               <!-- إدخال الرقم المدني للطالب -->
-              <div class="mb-6">
-                <label for="studentId" class="block text-lg font-medium text-gold-500 mb-2">الرقم المدني للطالب:</label>
-                <input type="text" id="studentId" class="w-full p-3 rounded-lg input-field focus:outline-none" placeholder="أدخل الرقم المدني">
+              <div class="mb-4">
+                <label for="studentId" class="block text-base font-medium text-gold-500 mb-2">الرقم المدني للطالب:</label>
+                <input type="text" id="studentId" class="w-full p-3 rounded-lg input-field focus:outline-none text-sm" placeholder="أدخل الرقم المدني">
               </div>
 
               <!-- اختيار المادة -->
-              <div class="mb-6">
-                <label for="subjectSelect" class="block text-lg font-medium text-gold-500 mb-2">اختر المادة:</label>
-                <select id="subjectSelect" class="w-full p-3 rounded-lg select-field focus:outline-none">
+              <div class="mb-4">
+                <label for="subjectSelect" class="block text-base font-medium text-gold-500 mb-2">اختر المادة:</label>
+                <select id="subjectSelect" class="w-full p-3 rounded-lg select-field focus:outline-none text-sm">
                   <option value="">-- اختر المادة --</option>
                   <option value="social">📚 الدراسات الاجتماعية</option>
                   <option value="islamic">🕌 التربية الإسلامية</option>
-                  <option value="arabic5_9">📖 اللغة العربية (الصفوف 5-9)</option>
-                  <option value="arabic10">📖 اللغة العربية (الصف العاشر)</option>
-                  <option value="math5_9">➗ الرياضيات (الصفوف 5-9)</option>
-                  <option value="math10">📊 الرياضيات (الصف العاشر)</option>
-                  <option value="english5_9">📝 اللغة الإنجليزية (الصفوف 5-9)</option>
-                  <option value="english10">📝 اللغة الإنجليزية (الصف العاشر)</option>
+                  <option value="arabic5_9">📖 اللغة العربية (5-9)</option>
+                  <option value="arabic10">📖 اللغة العربية (10)</option>
+                  <option value="math5_9">➗ الرياضيات (5-9)</option>
+                  <option value="math10">📊 الرياضيات (10)</option>
+                  <option value="english5_9">📝 الإنجليزية (5-9)</option>
+                  <option value="english10">📝 الإنجليزية (10)</option>
                   <option value="physics">🔬 الفيزياء</option>
                   <option value="science">🧪 العلوم</option>
                   <option value="chemistry">🧫 الكيمياء</option>
@@ -417,24 +486,24 @@
               </div>
 
               <!-- زر البحث -->
-              <button onclick="fetchGrades()" class="w-full py-3 rounded-lg button-primary focus:outline-none mb-6">
+              <button onclick="fetchGrades()" class="w-full py-3 rounded-lg button-primary focus:outline-none mb-4 text-sm">
                 <i class="fas fa-search mr-2"></i>
                 عرض الدرجات
               </button>
 
               <!-- عرض النتائج -->
-              <div id="gradesResult" class="mt-6"></div>
+              <div id="gradesResult" class="mt-4"></div>
             </div>
           </div>
         </div>
 
-        <!-- باقي الأقسام (نفس الكود السابق) -->
+        <!-- قسم المقترحات والآراء -->
         <div id="suggestions" class="content-section">
-          <div class="card p-8">
-            <h2 class="text-3xl font-bold text-gold-500 text-center mb-8">المقترحات والآراء</h2>
+          <div class="card p-6">
+            <h2 class="text-2xl font-bold text-gold-500 text-center mb-6">المقترحات والآراء</h2>
             <div class="text-center">
-              <p class="text-xl mb-6">نرحب بآرائكم ومقترحاتكم لتطوير مدرستنا</p>
-              <button onclick="openSuggestionsPage()" class="button-primary px-8 py-3 rounded-lg">
+              <p class="text-lg mb-4">نرحب بآرائكم ومقترحاتكم لتطوير مدرستنا</p>
+              <button onclick="openSuggestionsPage()" class="button-primary px-6 py-3 rounded-lg text-sm">
                 <i class="fas fa-external-link-alt mr-2"></i>
                 الانتقال إلى منصة المقترحات
               </button>
@@ -442,108 +511,102 @@
           </div>
         </div>
 
-        <!-- الأقسام الأخرى (نفس الكود السابق) -->
+        <!-- باقي الأقسام -->
         <div id="behavior" class="content-section">
-          <div class="card p-8 text-center">
-            <h2 class="text-3xl font-bold text-gold-500 mb-6">منصة السلوك</h2>
-            <p class="text-xl mb-6">سيتم تفعيل هذه الخدمة قريباً</p>
-            <button onclick="openExternal('https://mohdschool.github.io/behavior/')" class="button-secondary px-6 py-3 rounded-lg">
+          <div class="card p-6 text-center">
+            <h2 class="text-2xl font-bold text-gold-500 mb-4">منصة السلوك</h2>
+            <p class="text-lg mb-4">سيتم تفعيل هذه الخدمة قريباً</p>
+            <button onclick="openExternal('https://mohdschool.github.io/behavior/')" class="button-secondary px-4 py-2 rounded-lg text-sm">
               زيارة المنصة الحالية
             </button>
           </div>
         </div>
 
         <div id="schedule" class="content-section">
-          <div class="card p-8 text-center">
-            <h2 class="text-3xl font-bold text-gold-500 mb-6">جدول الحصص</h2>
-            <p class="text-xl mb-6">سيتم تفعيل هذه الخدمة قريباً</p>
-            <button onclick="openExternal('https://moh7211.edupage.org/timetable/')" class="button-secondary px-6 py-3 rounded-lg">
+          <div class="card p-6 text-center">
+            <h2 class="text-2xl font-bold text-gold-500 mb-4">جدول الحصص</h2>
+            <p class="text-lg mb-4">سيتم تفعيل هذه الخدمة قريباً</p>
+            <button onclick="openExternal('https://moh7211.edupage.org/timetable/')" class="button-secondary px-4 py-2 rounded-lg text-sm">
               زيارة الجدول الحالي
             </button>
           </div>
         </div>
 
         <div id="exams" class="content-section">
-          <div class="card p-8 text-center">
-            <h2 class="text-3xl font-bold text-gold-500 mb-6">جدول الامتحانات</h2>
-            <p class="text-xl mb-6">سيتم تفعيل هذه الخدمة قريباً</p>
-            <div class="flex gap-4 justify-center">
-              <button onclick="openExternal('https://mohdschool.github.io/7211/')" class="button-secondary px-6 py-3 rounded-lg">
+          <div class="card p-6 text-center">
+            <h2 class="text-2xl font-bold text-gold-500 mb-4">جدول الامتحانات</h2>
+            <p class="text-lg mb-4">سيتم تفعيل هذه الخدمة قريباً</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+              <button onclick="openExternal('https://mohdschool.github.io/7211/')" class="button-secondary px-4 py-2 rounded-lg text-sm">
                 امتحانات قصيرة
               </button>
-              <button onclick="openExternal('https://mohdschool.github.io/Finalexams/')" class="button-secondary px-6 py-3 rounded-lg">
+              <button onclick="openExternal('https://mohdschool.github.io/Finalexams/')" class="button-secondary px-4 py-2 rounded-lg text-sm">
                 امتحانات نهائية
               </button>
             </div>
           </div>
         </div>
 
-        <div id="certificates" class="content-section">
-          <div class="card p-8 text-center">
-            <h2 class="text-3xl font-bold text-gold-500 mb-6">الشهادات</h2>
-            <p class="text-xl mb-6">سيتم تفعيل هذه الخدمة قريباً</p>
-            <button onclick="openExternal('https://mohdschool.github.io/certificate/')" class="button-secondary px-6 py-3 rounded-lg">
-              زيارة المنصة الحالية
-            </button>
-          </div>
-        </div>
+      </div>
+    </div>
+  </div>
 
-        <div id="health" class="content-section">
-          <div class="card p-8 text-center">
-            <h2 class="text-3xl font-bold text-gold-500 mb-6">المدرسة المعززة للصحة</h2>
-            <p class="text-xl mb-6">سيتم تفعيل هذه الخدمة قريباً</p>
-            <button onclick="openExternal('https://mohdschool.github.io/12A/')" class="button-secondary px-6 py-3 rounded-lg">
-              زيارة المنصة الحالية
-            </button>
-          </div>
-        </div>
-
-        <div id="creativity" class="content-section">
-          <div class="card p-8 text-center">
-            <h2 class="text-3xl font-bold text-gold-500 mb-6">إبداعات المعلمين</h2>
-            <p class="text-xl mb-6">سيتم تفعيل هذه الخدمة قريباً</p>
-            <button onclick="openExternal('https://mohdschool.github.io/ebdaa3/')" class="button-secondary px-6 py-3 rounded-lg">
-              زيارة المنصة الحالية
-            </button>
-          </div>
-        </div>
-
-        <div id="noor" class="content-section">
-          <div class="card p-8 text-center">
-            <h2 class="text-3xl font-bold text-gold-500 mb-6">منصة نور</h2>
-            <p class="text-xl mb-6">سيتم تفعيل هذه الخدمة قريباً</p>
-            <button onclick="openExternal('https://lms.moe.gov.om/')" class="button-secondary px-6 py-3 rounded-lg">
-              زيارة المنصة الحالية
-            </button>
-          </div>
-        </div>
-
+  <!-- قائمة الهاتف -->
+  <div class="mobile-menu">
+    <div class="mobile-menu-item active" onclick="showMobileSection('welcome')">
+      <div class="flex flex-col items-center">
+        <i class="fas fa-home mobile-menu-icon"></i>
+        <span class="mobile-menu-text">الرئيسية</span>
+      </div>
+    </div>
+    <div class="mobile-menu-item" onclick="showMobileSection('grades')">
+      <div class="flex flex-col items-center">
+        <i class="fas fa-chart-line mobile-menu-icon"></i>
+        <span class="mobile-menu-text">الدرجات</span>
+      </div>
+    </div>
+    <div class="mobile-menu-item" onclick="showMobileSection('suggestions')">
+      <div class="flex flex-col items-center">
+        <i class="fas fa-comments mobile-menu-icon"></i>
+        <span class="mobile-menu-text">المقترحات</span>
+      </div>
+    </div>
+    <div class="mobile-menu-item" onclick="showMobileSection('behavior')">
+      <div class="flex flex-col items-center">
+        <i class="fas fa-chart-bar mobile-menu-icon"></i>
+        <span class="mobile-menu-text">السلوك</span>
+      </div>
+    </div>
+    <div class="mobile-menu-item" onclick="showMobileSection('schedule')">
+      <div class="flex flex-col items-center">
+        <i class="fas fa-clock mobile-menu-icon"></i>
+        <span class="mobile-menu-text">الجدول</span>
       </div>
     </div>
   </div>
 
   <!-- التذييل -->
-  <div class="bg-black/20 mt-12 py-6">
+  <div class="bg-black/20 py-4 mt-8">
     <div class="container mx-auto px-4 text-center">
-      <p>جميع الحقوق محفوظة © لإدارة مدرسة محمد بن سليمان الغافري</p>
+      <p class="text-sm">جميع الحقوق محفوظة © لإدارة مدرسة محمد بن سليمان الغافري</p>
     </div>
   </div>
 
   <!-- نافذة الترحيب المنبثقة -->
-  <div id="welcomeModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-    <div class="card p-8 max-w-2xl mx-4 max-h-[80vh] overflow-y-auto">
-      <button onclick="closeWelcomeModal()" class="absolute top-4 left-4 text-gray-500 hover:text-white text-2xl">
+  <div id="welcomeModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden px-4">
+    <div class="card p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+      <button onclick="closeWelcomeModal()" class="absolute top-4 left-4 text-gray-500 hover:text-white text-xl">
         <i class="fas fa-times"></i>
       </button>
-      <h2 class="text-3xl font-bold text-gold-500 text-center mb-6">🌟 مرحباً بكم في منصة تواصل 🌟</h2>
-      <div class="text-right space-y-4 text-lg leading-8">
+      <h2 class="text-2xl font-bold text-gold-500 text-center mb-4">🌟 مرحباً بكم في منصة تواصل 🌟</h2>
+      <div class="text-right space-y-3 text-base leading-7">
         <p>إلى شركائنا في بناء هذا الصرح التعليمي الشامخ (<strong>أولياء أمور طلابنا الكرام</strong>) وإلى أبطال مدرستنا طلابنا النجباء الذين يشكلون بوصلتنا نحو المستقبل…</p>
         <p>من هنا … من مدرسة محمد بن سليمان الغافري ننطلق برؤية واضحة ورسالة تحمل في طياتها طموحًا لا يعرف الحدود.</p>
         <p>نقدم لكم منصتنا التعليمية (<strong>منصة تواصل</strong>) ليس كإضافة عابرة بل كدليلٍ حيّ على سعينا المستمر نحو التميز واستلهامًا لمسؤوليتنا المشتركة في تحقيق الريادة.</p>
         <p>نحن لا نبحث عن مجرّد تصدر القوائم ولا نركض خلف أضواء الشهرة بل نطمح لأن تكون هذه المدرسة منارةً تعليميةً أولى في سلطنة عُمان لا لذاتها بل لأجل أبنائها ليحجزوا مواقعهم في مقدمة المشهد العلمي ، في أرقى الجامعات ، وفي أعظم الميادين الفكرية والمعرفية محليًا وعالميًا.</p>
-        <p class="text-center text-2xl font-bold text-gold-500 mt-6">نحن هنا لأن المستقبل يبدأ من هنا.</p>
+        <p class="text-center text-xl font-bold text-gold-500 mt-4">نحن هنا لأن المستقبل يبدأ من هنا.</p>
       </div>
-      <button onclick="closeWelcomeModal()" class="button-primary w-full mt-6 py-3 rounded-lg">
+      <button onclick="closeWelcomeModal()" class="button-primary w-full mt-4 py-3 rounded-lg text-sm">
         <i class="fas fa-check mr-2"></i>
         فهمت، شكراً لك
       </button>
@@ -568,6 +631,39 @@
       
       // تفعيل عنصر القائمة المحدد
       event.currentTarget.classList.add('active');
+      
+      // تحديث قائمة الهاتف أيضاً
+      updateMobileMenu(sectionId);
+    }
+
+    // دالة لعرض الأقسام من قائمة الهاتف
+    function showMobileSection(sectionId) {
+      // إخفاء جميع الأقسام
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      
+      // عرض القسم المحدد
+      document.getElementById(sectionId).classList.add('active');
+      
+      // تحديث قائمة الهاتف
+      updateMobileMenu(sectionId);
+    }
+
+    // دالة تحديث قائمة الهاتف
+    function updateMobileMenu(activeSection) {
+      document.querySelectorAll('.mobile-menu-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      
+      // إيجاد العنصر المناسب في قائمة الهاتف
+      const menuItems = document.querySelectorAll('.mobile-menu-item');
+      for (let i = 0; i < menuItems.length; i++) {
+        if (menuItems[i].onclick && menuItems[i].onclick.toString().includes(activeSection)) {
+          menuItems[i].classList.add('active');
+          break;
+        }
+      }
     }
 
     // دالة عرض رسالة الترحيب
@@ -598,7 +694,7 @@
       window.open('suggestions.html', '_blank');
     }
 
-    // دالة استعلام الدرجات (نفس الكود السابق)
+    // دالة استعلام الدرجات
     async function fetchGrades() {
       const studentId = document.getElementById('studentId').value.trim();
       const subject = document.getElementById('subjectSelect').value;
@@ -624,7 +720,7 @@
         biology: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSk_TuS5L3YexPjYyLlIL6nHFAvkafQKGCYwwKw57vBo1FWF97RM5oSQPCVKZuWsD9egF5r9gErhzMn/pub?gid=0&single=true&output=csv"
       };
 
-      resultDiv.innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin text-2xl text-gold-500"></i><p class="mt-2">جاري تحميل البيانات...</p></div>';
+      resultDiv.innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin text-xl text-gold-500"></i><p class="mt-2 text-sm">جاري تحميل البيانات...</p></div>';
 
       try {
         const response = await fetch(subjectLinks[subject]);
@@ -639,7 +735,7 @@
           return;
         }
 
-        let dataHTML = `<h3 class="text-xl font-bold text-gold-500 mb-6 text-center">بيانات الطالب:</h3>`;
+        let dataHTML = `<h3 class="text-lg font-bold text-gold-500 mb-4 text-center">بيانات الطالب:</h3>`;
         headers.forEach((header, index) => {
           if (header && studentRow[index]) {
             dataHTML += `
@@ -660,18 +756,8 @@
 
     // تهيئة الصفحة
     document.addEventListener('DOMContentLoaded', function() {
-      // إضافة تأثيرات تفاعلية
-      const menuItems = document.querySelectorAll('.menu-item');
-      menuItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-          this.style.transform = 'translateX(-10px)';
-        });
-        item.addEventListener('mouseleave', function() {
-          if (!this.classList.contains('active')) {
-            this.style.transform = 'translateX(0)';
-          }
-        });
-      });
+      // تحديث قائمة الهاتف عند التحميل
+      updateMobileMenu('welcome');
     });
   </script>
 </body>
